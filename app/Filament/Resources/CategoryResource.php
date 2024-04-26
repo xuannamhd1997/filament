@@ -26,13 +26,6 @@ class CategoryResource extends Resource
             ->schema([
                 TextInput::make('name')->required(),
                 TextInput::make('slug')->required(),
-
-
-
-
-
-
-
                 //
             ]);
     }

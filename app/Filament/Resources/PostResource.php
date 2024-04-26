@@ -5,8 +5,16 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PostResource\Pages;
 use App\Filament\Resources\PostResource\RelationManagers;
 use App\Models\Post;
+use App\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Checkbox; 
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\ColorPicker; 
+use Filament\Forms\Components\MarkdownEditor; 
+use Filament\Forms\Components\TagsInput; 
+use Filament\Forms\Components\Select;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -23,7 +31,16 @@ class PostResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('title')->required(),
+                TextInput::make( 'slug')->required(),
+                Select::make('category_id')
+                ->label('Category')
+                ->options (Category::all()->pluck ('name', 'id')), 
+                ColorPicker::make('color')->required(),
+                FileUpload::make('thumbnail')->disk('public')->directory( 'thumbnails'),
+                MarkdownEditor::make('content')->required(),
+                TagsInput::make( 'tags')->required(), Checkbox::make( 'published')->required(),
+                
             ]);
     }
 
