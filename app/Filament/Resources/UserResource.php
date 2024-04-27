@@ -8,7 +8,7 @@ use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
-// use App\Filament\Resources\UserResource\TextColumn;
+use App\Filament\Resources\UserResource\TextColumn;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -21,6 +21,8 @@ class UserResource extends Resource
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
+
+    // protected static ?string $modelLabel = 'Khách hàng';
 
     public static function form(Form $form): Form//form tạo user
     {

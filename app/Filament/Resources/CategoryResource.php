@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CategoryResource\Pages;
-use App\Filament\Resources\CategoryResource\RelationManagers;
+use App\Filament\Resources\CategoryResource\RelationManagers\PostsRelationManager;
 use App\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -19,6 +19,8 @@ class CategoryResource extends Resource
     protected static ?string $model = Category::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-queue-list';
+
+    // protected static ?string $modelLabel = 'heroicon-o-queue-list';
 
     public static function form(Form $form): Form
     {
@@ -58,6 +60,7 @@ class CategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
+            PostsRelationManager::class
             //
         ];
     }

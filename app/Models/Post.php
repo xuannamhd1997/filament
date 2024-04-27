@@ -21,6 +21,10 @@ class Post extends Model
     ];
 
     protected $casts = [
-        'tag' => 'array',
+        'tags' => 'array',
     ];
+
+    public function category() {
+        return $this->belongsto(Category::class);
+    }
 }
