@@ -44,12 +44,24 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')//trường
-                ->label('ID')//tên hiển thị
-                ->sortable(),//cot ten
+                    ->label('ID')//tên hiển thị
+                    ->sortable(),//cot ten
                 Tables\Columns\TextColumn::make('name')
-                ->label('Tên')
-                ->searchable(),//cho phép tìm kiếm theo trường này
+                    ->label('Tên')
+                    ->searchable(),//cho phép tìm kiếm theo trường này
                 Tables\Columns\TextColumn::make('email'),//cot email
+
+                Tables\Columns\TextColumn::make('email'),//cot email
+
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable(),
+                    // ->toggleable(isToggledHiddenByDefault:true),
+
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable(),
+                    // ->toggleable(isToggledHiddenByDefault:true),
             ])
             ->paginated([25, 36, 50, 100,])// phân trang
             ->defaultSort('id', 'desc')//danh sách sắp xếp mặc định id giảm dần

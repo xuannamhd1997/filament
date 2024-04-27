@@ -11,6 +11,7 @@ use Filament\Forms\Form;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Checkbox; 
+use Filament\Infolists\Components\Tabs;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\ColorPicker; 
 use Filament\Forms\Components\MarkdownEditor; 
@@ -25,6 +26,9 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 
 class PostResource extends Resource
 {
@@ -124,6 +128,29 @@ class PostResource extends Resource
                     ->date('d-m-Y'), 
             ])
             ->filters([
+
+                Filter::make('Published')->query( 
+                    function (Builder $query): Builder {
+                        return $query->where('published', true);
+                    },
+                ),
+
+                Filter::make('Unpublished')->query( 
+                    function (Builder $query): Builder {
+                        return $query->where('published', false);
+                    },
+                ),
+
+                // TernaryFilter::make('Published'),
+
+                SelectFilter::make( 'category_id')
+                    ->label('Category')
+                    // ->options (Category:: all()->pluck ('name', 'id'))
+                    // ->multiple()
+                    ->relationship('category', 'name')
+                    ->searchable()
+                    ->preload()
+
                 //
             ])
             ->actions([
